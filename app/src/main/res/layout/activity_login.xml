@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/view_24"
+        android:paddingTop="@dimen/view_32"
+        android:paddingEnd="@dimen/view_24"
+        android:paddingBottom="@dimen/view_32">
+
+        <ImageView
+            android:layout_width="@dimen/view_200"
+            android:layout_height="@dimen/view_100"
+            android:layout_gravity="center"
+            android:contentDescription="@string/img_desc"
+            app:srcCompat="@drawable/app_logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_welcome_back"
+            android:textSize="@dimen/text_18"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/view_8"
+            android:text="@string/label_please_login"
+            android:textColor="@color/logo_scheme_2" />
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/view_16">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/view_8"
+                android:layout_marginTop="@dimen/view_12"
+                android:layout_marginEnd="@dimen/view_8"
+                android:text="@string/title_email" />
+
+            <custom.view.widget.NoChangingBackgroundTextInputLayout
+                android:id="@+id/form_email"
+                style="@style/NoBackgroundTextInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/view_8"
+                android:layout_marginEnd="@dimen/view_8">
+
+                <EditText
+                    android:id="@+id/et_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:hint="@string/empty_hint"
+                    android:importantForAutofill="no"
+                    android:inputType="textEmailAddress"
+                    android:maxLength="32"
+                    android:maxLines="1" />
+            </custom.view.widget.NoChangingBackgroundTextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/view_8"
+                android:layout_marginTop="@dimen/view_12"
+                android:layout_marginEnd="@dimen/view_8"
+                android:ellipsize="end"
+                android:maxLength="32"
+                android:maxLines="1"
+                android:text="@string/title_password" />
+
+            <custom.view.widget.NoChangingBackgroundTextInputLayout
+                android:id="@+id/form_password"
+                style="@style/NoBackgroundTextInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/view_8"
+                android:layout_marginEnd="@dimen/view_8"
+                app:passwordToggleEnabled="true">
+
+                <EditText
+                    android:id="@+id/et_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/empty_hint"
+                    android:importantForAutofill="no"
+                    android:inputType="textPassword" />
+            </custom.view.widget.NoChangingBackgroundTextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/view_4"
+                android:layout_marginTop="@dimen/view_20"
+                android:layout_marginEnd="@dimen/view_4">
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/remember_me"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="@dimen/view_6"
+                    android:text="@string/label_remember_me"
+                    android:textColor="@color/logo_scheme_3" />
+
+                <TextView
+                    android:id="@+id/forgot_password"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:padding="@dimen/view_6"
+                    android:text="@string/title_forgot_password"
+                    android:textColor="@color/accent"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/bt_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/view_8"
+                android:layout_marginTop="@dimen/view_32"
+                android:layout_marginEnd="@dimen/view_8"
+                android:enabled="false"
+                android:text="@string/title_login" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/view_32"
+                android:padding="@dimen/view_8"
+                android:text="@string/label_have_no_account"
+                android:textColor="@color/logo_scheme_3" />
+
+            <Button
+                android:id="@+id/bt_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/view_8"
+                android:layout_marginTop="@dimen/view_8"
+                android:layout_marginEnd="@dimen/view_8"
+                android:background="@drawable/bg_my_edit_text"
+                android:text="@string/title_register"
+                android:textColor="@color/accent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/view_32"
+                android:text="@string/label_agree_with_tos"
+                android:textColor="@color/logo_scheme_3" />
+
+            <TextView
+                android:id="@+id/tos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/view_8"
+                android:text="@string/title_tos" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

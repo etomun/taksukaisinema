@@ -1,0 +1,175 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+}
+
+android {
+    def conf = rootProject.configs
+    def v = rootProject.versions
+
+    compileSdkVersion v.compileSdk
+
+    defaultConfig {
+        minSdkVersion v.minSdk
+        targetSdkVersion v.targetSdk
+
+        applicationId conf.appId
+        versionName conf.versionName
+        versionCode conf.versionCode
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary true
+
+        manifestPlaceholders = [baseUrlIntent: baseUrlIntent]
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
+    }
+
+    flavorDimensions "environment", "tier"
+    productFlavors {
+        dev {
+            dimension "environment"
+            applicationIdSuffix ".dev"
+            versionName "${defaultConfig.versionName}-${productFlavors[0].name}"
+            buildConfigField("String", "BASE_URL", baseUrlDev)
+            buildConfigField("String", "IMAGE_URL", baseUrlImage)
+            buildConfigField("String", "API_KEY", apiKey)
+        }
+
+        staging {
+            dimension "environment"
+            applicationIdSuffix ".stag"
+            versionName "${defaultConfig.versionName}-${productFlavors[0].name}"
+            buildConfigField("String", "BASE_URL", baseUrlStaging)
+            buildConfigField("String", "IMAGE_URL", baseUrlImage)
+            buildConfigField("String", "API_KEY", apiKey)
+        }
+
+        prod {
+            dimension "environment"
+            buildConfigField("String", "BASE_URL", baseUrlProd)
+            buildConfigField("String", "IMAGE_URL", baseUrlImage)
+            buildConfigField("String", "API_KEY", apiKey)
+        }
+
+        demo {
+            dimension "tier"
+            applicationIdSuffix ".demo"
+            buildConfigField("Boolean", "ANALYTICS", "false")
+        }
+
+        full {
+            dimension "tier"
+            buildConfigField("Boolean", "ANALYTICS", "true")
+        }
+    }
+
+    applicationVariants.all { variant ->
+        def versionName = "$variant.versionName"
+        def versionCode = "$variant.versionCode"
+
+        if ("$variant.flavorName".contains("Demo")) {
+            versionName = "$variant.versionName-demo"
+        }
+
+        variant.outputs.each { output ->
+            output.setVersionNameOverride(versionName)
+
+            def apkFileName = "Kaisinema-${versionName}-${variant.buildType.name}-${versionCode}-${getDate()}.apk"
+            output.outputFileName = new File(apkFileName)
+        }
+    }
+}
+
+dependencies {
+    def libs = rootProject.libs
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation libs.ktx
+
+    implementation libs.multidex
+
+    implementation libs.dagger
+    implementation libs.daggerandroid
+    kapt libs.daggercompiler
+    kapt libs.daggerandroidprocessor
+
+    implementation libs.rxjava
+    implementation libs.rxandroid
+
+    implementation libs.okhttp
+    implementation libs.okhttplogger
+
+    implementation libs.retrofit
+    implementation libs.retrofitrx
+    implementation libs.retrofitgson
+
+    implementation libs.gson
+
+    implementation libs.material
+
+    implementation libs.appcompat
+    implementation libs.legacy
+    implementation libs.constraintlayout
+
+    implementation libs.lifecycleruntime
+    kapt libs.lifecyclecompiler
+
+    implementation libs.workruntime
+    implementation libs.workrx
+
+    implementation libs.roomruntime
+    implementation libs.roomrx
+    kapt libs.roomcompiler
+
+    implementation libs.navigationfragment
+    implementation libs.navigationui
+
+    implementation libs.timber
+
+    implementation libs.glide
+    kapt libs.glidecompiler
+
+    implementation libs.shimmer
+
+    /* https://github.com/square/okhttp/issues/5760 */
+    implementation 'org.conscrypt:conscrypt-android:2.2.1'
+
+    testImplementation libs.junit
+    testImplementation libs.robolectric
+    testImplementation libs.mockito
+    androidTestImplementation libs.androidjunit
+    androidTestImplementation libs.espresso
+
+    kaptTest libs.daggercompiler
+    kaptAndroidTest libs.daggercompiler
+}
+
+static def getDate() {
+    return new Date().format('yyyyMMddHHmm')
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#ffffff</color>
+    <color name="primary_dark">#eeeeee</color>
+    <color name="accent">#f39189</color>
+    <color name="accent_dark">#bb8082</color>
+    <color name="accent_light">#f39189</color>
+    <color name="accent_highlight">#FFDBD8</color>
+
+    <color name="selected_item_list">#33404B55</color>
+
+    <color name="logo_scheme_1">#6e7582</color>
+    <color name="logo_scheme_2">#046582</color>
+    <color name="logo_scheme_3">#AEB6C1</color>
+    <color name="logo_scheme_4">#f39189</color>
+    <color name="logo_scheme_5">#FFDBD8</color>
+    <color name="logo_scheme_6">#455259</color>
+
+    <color name="black_7">#77000000</color>
+    <color name="white_7">#77ffffff</color>
+    <color name="c_3">#333333</color>
+    <color name="black_3">#33000000</color>
+    <color name="red_highlight">#ffcdd2</color>
+    <color name="red">#f44336</color>
+
+    <color name="shimmer_base">#cccccc</color>
+
+</resources>

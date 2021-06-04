@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:opacity="opaque">
+    <item android:drawable="@drawable/ic_launcher_background" />
+    <item
+        android:bottom="@dimen/view_40"
+        android:drawable="@drawable/app_logo_square"
+        android:gravity="center"
+        android:left="@dimen/view_40"
+        android:right="@dimen/view_40"
+        android:top="@dimen/view_40" />
+</layer-list>
